@@ -1,0 +1,5148 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<title>ATHENA GAME UNIVERSE</title>
+
+<style>
+
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&display=swap');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+:root{
+    --pink:#ff8fc7;
+    --pink2:#ffb6dc;
+    --purple:#a78bfa;
+    --blue:#7dd3fc;
+    --yellow:#fde68a;
+    --green:#86efac;
+    --orange:#fdba74;
+
+    --bg:#fff7fc;
+    --card:rgba(255,255,255,.90);
+    --text:#49334f;
+
+    --shadow:0 15px 40px rgba(180,110,170,.18);
+}
+
+body{
+    font-family:'Baloo 2',cursive;
+    background:
+        radial-gradient(circle at 10% 10%,#ffd8ec 0 10%,transparent 25%),
+        radial-gradient(circle at 90% 15%,#d8c8ff 0 10%,transparent 25%),
+        radial-gradient(circle at 50% 100%,#c9f3ff 0 10%,transparent 25%),
+        var(--bg);
+
+    color:var(--text);
+    min-height:100vh;
+    overflow-x:hidden;
+}
+
+body.dark{
+    --bg:#171323;
+    --card:rgba(38,30,53,.94);
+    --text:#fff2fb;
+
+    background:
+        radial-gradient(circle at 10% 10%,#43284d 0 10%,transparent 30%),
+        radial-gradient(circle at 90% 15%,#30255c 0 10%,transparent 30%),
+        #171323;
+}
+
+button{
+    font-family:inherit;
+    border:none;
+    cursor:pointer;
+}
+
+input{
+    font-family:inherit;
+}
+
+#particles{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:-1;
+}
+
+.particle{
+    position:absolute;
+    font-size:20px;
+    animation:float 8s linear infinite;
+    opacity:.65;
+}
+
+@keyframes float{
+    0%{
+        transform:translateY(110vh) rotate(0deg)
+    }
+
+    100%{
+        transform:translateY(-10vh) rotate(360deg)
+    }
+}
+
+/* ==============================
+   LOGIN
+============================== */
+
+#loginScreen{
+    position:fixed;
+    inset:0;
+    z-index:1000;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    padding:20px;
+
+    background:
+        radial-gradient(circle at 20% 20%,#ffd5eb,transparent 35%),
+        radial-gradient(circle at 80% 20%,#d9ccff,transparent 35%),
+        linear-gradient(135deg,#fff7fc,#f4eaff);
+}
+
+.login-box{
+    width:min(450px,100%);
+
+    padding:35px;
+
+    background:rgba(255,255,255,.88);
+
+    border-radius:35px;
+
+    box-shadow:
+        0 30px 80px rgba(130,80,150,.25);
+
+    text-align:center;
+
+    backdrop-filter:blur(20px);
+
+    animation:loginPop .5s ease;
+}
+
+body.dark #loginScreen{
+    background:
+        radial-gradient(circle at 20% 20%,#43284d,transparent 35%),
+        radial-gradient(circle at 80% 20%,#30255c,transparent 35%),
+        #171323;
+}
+
+body.dark .login-box{
+    background:rgba(38,30,53,.95);
+}
+
+@keyframes loginPop{
+    from{
+        transform:scale(.8);
+        opacity:0;
+    }
+
+    to{
+        transform:scale(1);
+        opacity:1;
+    }
+}
+
+.login-logo{
+    font-size:55px;
+}
+
+.login-box h1{
+    color:var(--pink);
+    font-size:38px;
+}
+
+.login-box p{
+    opacity:.7;
+    margin-bottom:25px;
+}
+
+.login-box input{
+    width:100%;
+    padding:15px;
+
+    border:3px solid var(--pink2);
+    border-radius:18px;
+
+    margin:7px 0;
+
+    font-size:17px;
+
+    outline:none;
+}
+
+.login-btn{
+    width:100%;
+
+    padding:15px;
+
+    margin-top:12px;
+
+    border-radius:18px;
+
+    color:white;
+
+    font-size:18px;
+    font-weight:800;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--pink),
+            var(--purple)
+        );
+}
+
+/* ==============================
+   LOADING
+============================== */
+
+#loadingScreen{
+    position:fixed;
+    inset:0;
+
+    z-index:2000;
+
+    display:none;
+
+    justify-content:center;
+    align-items:center;
+
+    background:
+        linear-gradient(
+            135deg,
+            #fff5fb,
+            #eee5ff
+        );
+}
+
+body.dark #loadingScreen{
+    background:
+        linear-gradient(
+            135deg,
+            #171323,
+            #29203b
+        );
+}
+
+.loading-box{
+    text-align:center;
+    width:min(450px,90%);
+}
+
+.loading-logo{
+    font-size:70px;
+
+    animation:
+        loadingBounce
+        1s
+        infinite;
+}
+
+@keyframes loadingBounce{
+    0%,100%{
+        transform:translateY(0);
+    }
+
+    50%{
+        transform:translateY(-15px);
+    }
+}
+
+.loading-box h1{
+    color:var(--pink);
+    font-size:35px;
+}
+
+.loading-status{
+    margin-top:10px;
+    opacity:.7;
+}
+
+.loading-bar{
+    width:100%;
+    height:15px;
+
+    margin-top:25px;
+
+    background:#eaddec;
+
+    border-radius:30px;
+
+    overflow:hidden;
+}
+
+.loading-progress{
+    width:0%;
+    height:100%;
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--pink),
+            var(--purple),
+            var(--blue)
+        );
+
+    transition:.2s;
+}
+
+/* ==============================
+   HEADER
+============================== */
+
+header{
+    padding:22px 5%;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    gap:15px;
+
+    position:sticky;
+    top:0;
+
+    z-index:50;
+
+    backdrop-filter:blur(15px);
+
+    background:rgba(255,255,255,.45);
+
+    border-bottom:1px solid rgba(255,255,255,.5);
+}
+
+body.dark header{
+    background:rgba(20,15,30,.70);
+}
+
+.logo{
+    font-size:28px;
+    font-weight:800;
+    color:var(--pink);
+}
+
+.logo span{
+    color:var(--purple);
+}
+
+.top-buttons{
+    display:flex;
+    gap:8px;
+}
+
+.icon-btn{
+    width:43px;
+    height:43px;
+
+    border-radius:50%;
+
+    background:var(--card);
+
+    box-shadow:var(--shadow);
+
+    font-size:20px;
+
+    transition:.2s;
+}
+
+.icon-btn:hover{
+    transform:translateY(-3px) rotate(5deg);
+}
+
+/* ==============================
+   PLAYER
+============================== */
+
+.player-info{
+    max-width:1100px;
+
+    margin:15px auto 0;
+
+    padding:0 20px;
+}
+
+.player-badge{
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    padding:8px 15px;
+
+    border-radius:20px;
+
+    background:var(--card);
+
+    box-shadow:var(--shadow);
+
+    font-weight:700;
+}
+
+/* ==============================
+   HERO
+============================== */
+
+.hero{
+    text-align:center;
+
+    padding:55px 20px 35px;
+}
+
+.hero h1{
+    font-size:clamp(40px,8vw,78px);
+
+    line-height:.9;
+
+    color:var(--pink);
+
+    text-shadow:4px 4px 0 white;
+}
+
+.hero h1 span{
+    color:var(--purple);
+}
+
+.hero p{
+    font-size:18px;
+    margin-top:18px;
+}
+
+/* ==============================
+   STATS
+============================== */
+
+.stats{
+    max-width:1100px;
+
+    margin:20px auto;
+
+    padding:0 20px;
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(4,1fr);
+
+    gap:15px;
+}
+
+.stat{
+    background:var(--card);
+
+    border-radius:25px;
+
+    padding:18px;
+
+    text-align:center;
+
+    box-shadow:var(--shadow);
+
+    backdrop-filter:blur(10px);
+}
+
+.stat .emoji{
+    font-size:30px;
+}
+
+.stat b{
+    display:block;
+
+    font-size:25px;
+
+    color:var(--purple);
+}
+
+.stat small{
+    opacity:.7;
+}
+
+/* ==============================
+   CONTAINER
+============================== */
+
+.container{
+    max-width:1100px;
+
+    margin:auto;
+
+    padding:20px;
+}
+
+.section-title{
+    font-size:30px;
+
+    margin:25px 0 18px;
+}
+
+/* ==============================
+   GAMES
+============================== */
+
+.games{
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:20px;
+}
+
+.game-card{
+    background:var(--card);
+
+    border-radius:30px;
+
+    padding:25px;
+
+    box-shadow:var(--shadow);
+
+    transition:.3s;
+
+    position:relative;
+
+    overflow:hidden;
+}
+
+.game-card:hover{
+    transform:
+        translateY(-8px)
+        rotate(.5deg);
+}
+
+.game-icon{
+    font-size:55px;
+
+    margin-bottom:8px;
+}
+
+.game-card h3{
+    font-size:25px;
+}
+
+.game-card p{
+    opacity:.7;
+
+    min-height:48px;
+}
+
+.play-btn{
+    width:100%;
+
+    margin-top:15px;
+
+    padding:13px;
+
+    border-radius:18px;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--pink),
+            var(--purple)
+        );
+
+    color:white;
+
+    font-size:17px;
+
+    font-weight:700;
+}
+
+/* ==============================
+   ACHIEVEMENT
+============================== */
+
+.achievements{
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:15px;
+}
+
+.achievement{
+    background:var(--card);
+
+    border-radius:20px;
+
+    padding:18px;
+
+    box-shadow:var(--shadow);
+}
+
+.locked{
+    opacity:.4;
+}
+
+/* ==============================
+   LEADERBOARD
+============================== */
+
+.leaderboard{
+    background:var(--card);
+
+    border-radius:25px;
+
+    padding:20px;
+
+    box-shadow:var(--shadow);
+}
+
+.rank-row{
+    display:grid;
+
+    grid-template-columns:
+        60px 1fr 100px 100px;
+
+    gap:10px;
+
+    align-items:center;
+
+    padding:12px;
+
+    border-bottom:1px solid rgba(150,100,150,.12);
+}
+
+.rank-row:last-child{
+    border-bottom:none;
+}
+
+.rank{
+    font-size:25px;
+    text-align:center;
+}
+
+.player-name{
+    font-weight:800;
+}
+
+.player-class{
+    font-size:13px;
+    opacity:.6;
+}
+
+.rank-score{
+    text-align:right;
+
+    font-weight:800;
+
+    color:var(--purple);
+}
+
+/* ==============================
+   MODAL
+============================== */
+
+.modal{
+    position:fixed;
+
+    inset:0;
+
+    background:
+        rgba(20,10,30,.7);
+
+    backdrop-filter:blur(8px);
+
+    z-index:100;
+
+    display:none;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:15px;
+}
+
+.modal.show{
+    display:flex;
+}
+
+.game-window{
+    width:min(700px,100%);
+
+    max-height:90vh;
+
+    overflow:auto;
+
+    background:var(--card);
+
+    border-radius:35px;
+
+    padding:28px;
+
+    box-shadow:
+        0 30px 80px rgba(0,0,0,.3);
+
+    animation:pop .3s ease;
+}
+
+@keyframes pop{
+    from{
+        transform:scale(.8);
+        opacity:0;
+    }
+
+    to{
+        transform:scale(1);
+        opacity:1;
+    }
+}
+
+.game-header{
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:20px;
+}
+
+.close{
+    width:40px;
+    height:40px;
+
+    border-radius:50%;
+
+    background:#ffe0ef;
+
+    font-size:20px;
+}
+
+.game-area{
+    min-height:300px;
+
+    padding:20px;
+
+    border-radius:25px;
+
+    background:rgba(255,255,255,.45);
+}
+
+body.dark .game-area{
+    background:rgba(0,0,0,.15);
+}
+
+.game-btn{
+    padding:12px 20px;
+
+    border-radius:15px;
+
+    background:var(--purple);
+
+    color:white;
+
+    font-size:17px;
+
+    margin:5px;
+}
+
+input{
+    width:100%;
+
+    padding:15px;
+
+    border:3px solid var(--pink2);
+
+    border-radius:17px;
+
+    outline:none;
+
+    font-size:17px;
+
+    background:white;
+}
+
+.result{
+    margin-top:18px;
+
+    font-size:20px;
+
+    text-align:center;
+
+    font-weight:700;
+}
+
+/* ==============================
+   QUIZ
+============================== */
+
+.quiz-question{
+    font-size:26px;
+
+    text-align:center;
+
+    margin:20px 0;
+}
+
+.answers{
+    display:grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap:10px;
+}
+
+.answer{
+    padding:15px;
+
+    border-radius:17px;
+
+    background:#f7d9ff;
+
+    color:#49334f;
+
+    font-size:16px;
+
+    transition:.2s;
+}
+
+.answer.locked{
+    pointer-events:none;
+}
+
+.answer.correct{
+    background:#86efac!important;
+}
+
+.answer.wrong{
+    background:#fca5a5!important;
+}
+
+.progress{
+    height:12px;
+
+    background:#eaddec;
+
+    border-radius:20px;
+
+    overflow:hidden;
+
+    margin:10px 0 20px;
+}
+
+.progress div{
+    height:100%;
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--pink),
+            var(--purple)
+        );
+
+    transition:.3s;
+}
+
+/* ==============================
+   MEMORY
+============================== */
+
+.memory-grid{
+    display:grid;
+
+    grid-template-columns:
+        repeat(4,1fr);
+
+    gap:10px;
+
+    max-width:400px;
+
+    margin:auto;
+}
+
+.memory-card{
+    aspect-ratio:1;
+
+    border-radius:15px;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--pink),
+            var(--purple)
+        );
+
+    color:transparent;
+
+    font-size:30px;
+}
+
+.memory-card.open,
+.memory-card.done{
+    color:white;
+}
+
+/* ==============================
+   TARGET
+============================== */
+
+.timer{
+    font-size:45px;
+
+    text-align:center;
+
+    font-weight:800;
+
+    color:var(--pink);
+}
+
+.target-zone{
+    position:relative;
+
+    height:260px;
+
+    border-radius:20px;
+
+    background:
+        rgba(255,200,230,.18);
+
+    overflow:hidden;
+}
+
+.click-target{
+    width:75px;
+    height:75px;
+
+    border-radius:50%;
+
+    background:var(--yellow);
+
+    position:absolute;
+
+    display:none;
+
+    font-size:30px;
+}
+
+/* ==============================
+   REFLEX
+============================== */
+
+.reflex{
+    text-align:center;
+
+    font-size:25px;
+
+    padding:40px 10px;
+
+    border-radius:20px;
+
+    background:#ddd;
+}
+
+/* ==============================
+   COLOR
+============================== */
+
+.color-box{
+    width:160px;
+    height:160px;
+
+    margin:20px auto;
+
+    border-radius:30px;
+}
+
+/* ==============================
+   SEQUENCE
+============================== */
+
+.sequence{
+    display:flex;
+
+    justify-content:center;
+
+    gap:10px;
+
+    flex-wrap:wrap;
+
+    margin:25px;
+}
+
+.seq-btn{
+    width:75px;
+    height:75px;
+
+    border-radius:20px;
+
+    font-size:28px;
+
+    background:var(--blue);
+}
+
+/* ==============================
+   DEVELOPER
+============================== */
+
+#developerSection{
+    display:none;
+}
+
+.dev-panel{
+    background:var(--card);
+
+    border-radius:25px;
+
+    padding:25px;
+
+    box-shadow:var(--shadow);
+
+    border:3px solid var(--purple);
+}
+
+.dev-grid{
+    display:grid;
+
+    grid-template-columns:
+        repeat(2,1fr);
+
+    gap:10px;
+}
+
+.dev-grid button{
+    padding:13px;
+
+    border-radius:15px;
+
+    background:var(--purple);
+
+    color:white;
+
+    font-weight:700;
+}
+
+.dev-grid input{
+    width:100%;
+}
+
+/* ==============================
+   TOAST
+============================== */
+
+#toast{
+    position:fixed;
+
+    bottom:25px;
+
+    left:50%;
+
+    transform:
+        translateX(-50%)
+        translateY(100px);
+
+    background:#49334f;
+
+    color:white;
+
+    padding:13px 22px;
+
+    border-radius:20px;
+
+    z-index:5000;
+
+    transition:.3s;
+
+    pointer-events:none;
+}
+
+#toast.show{
+    transform:
+        translateX(-50%)
+        translateY(0);
+}
+
+/* ==============================
+   FOOTER
+============================== */
+
+footer{
+    text-align:center;
+
+    padding:50px 20px;
+
+    opacity:.7;
+}
+
+/* ==============================
+   MOBILE
+============================== */
+
+@media(max-width:800px){
+
+    .games{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .stats{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .achievements{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .rank-row{
+        grid-template-columns:
+            45px 1fr 80px;
+    }
+
+    .rank-row .rank-games{
+        display:none;
+    }
+}
+
+@media(max-width:500px){
+
+    .games{
+        grid-template-columns:1fr;
+    }
+
+    .answers{
+        grid-template-columns:1fr;
+    }
+
+    .hero h1{
+        font-size:48px;
+    }
+
+    .dev-grid{
+        grid-template-columns:1fr;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- ==============================
+     LOGIN
+============================== -->
+
+<div id="loginScreen">
+
+    <div class="login-box">
+
+        <div class="login-logo">
+            🎮
+        </div>
+
+        <h1>ATHENA GAME</h1>
+
+        <p>
+            Masukkan identitas pemain untuk memulai.
+        </p>
+
+        <input
+            id="playerNameInput"
+            type="text"
+            maxlength="25"
+            placeholder="Nama pemain">
+
+        <input
+            id="playerClassInput"
+            type="text"
+            maxlength="15"
+            placeholder="Kelas contoh: X-1">
+
+        <button
+            class="login-btn"
+            onclick="startGameSystem()">
+
+            🚀 MASUK GAME
+
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- ==============================
+     LOADING
+============================== -->
+
+<div id="loadingScreen">
+
+    <div class="loading-box">
+
+        <div class="loading-logo">
+            🎮
+        </div>
+
+        <h1>
+            ATHENA GAME
+        </h1>
+
+        <p class="loading-status"
+           id="loadingStatus">
+            Menyiapkan game...
+        </p>
+
+        <div class="loading-bar">
+
+            <div
+                class="loading-progress"
+                id="loadingProgress">
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<div id="particles"></div>
+
+
+<!-- ==============================
+     HEADER
+============================== -->
+
+<header>
+
+    <div class="logo">
+        ATHENA<span>GAME</span> 🎮
+    </div>
+
+    <div class="top-buttons">
+
+        <button
+            class="icon-btn"
+            onclick="toggleDark()">
+            🌙
+        </button>
+
+        <button
+            class="icon-btn"
+            onclick="toggleSound()">
+            🔊
+        </button>
+
+        <button
+            class="icon-btn"
+            onclick="exportData()">
+            💾
+        </button>
+
+        <button
+            class="icon-btn"
+            onclick="resetCurrentPlayer()">
+            ♻️
+        </button>
+
+    </div>
+
+</header>
+
+
+<div class="player-info">
+
+    <div class="player-badge">
+
+        👤
+        <span id="playerDisplay">
+            Player
+        </span>
+
+    </div>
+
+</div>
+
+
+<!-- ==============================
+     HERO
+============================== -->
+
+<section class="hero">
+
+    <h1>
+        MINI GAME<br>
+        <span>UNIVERSE</span> ✨
+    </h1>
+
+    <p>
+        Kumpulan mini games lucu, cepat, dan menantang!
+    </p>
+
+</section>
+
+
+<!-- ==============================
+     STATS
+============================== -->
+
+<section class="stats">
+
+    <div class="stat">
+
+        <div class="emoji">
+            🏆
+        </div>
+
+        <b id="score">
+            0
+        </b>
+
+        <small>
+            Total Score
+        </small>
+
+    </div>
+
+
+    <div class="stat">
+
+        <div class="emoji">
+            🪙
+        </div>
+
+        <b id="coins">
+            0
+        </b>
+
+        <small>
+            Coins
+        </small>
+
+    </div>
+
+
+    <div class="stat">
+
+        <div class="emoji">
+            ⭐
+        </div>
+
+        <b id="level">
+            1
+        </b>
+
+        <small>
+            Level
+        </small>
+
+    </div>
+
+
+    <div class="stat">
+
+        <div class="emoji">
+            🎯
+        </div>
+
+        <b id="played">
+            0
+        </b>
+
+        <small>
+            Games Played
+        </small>
+
+    </div>
+
+</section>
+
+
+<main class="container">
+
+
+<!-- ==============================
+     GAMES
+============================== -->
+
+<h2 class="section-title">
+    🎮 Pilih Mini Game
+</h2>
+
+
+<div class="games">
+
+
+<div class="game-card">
+
+    <div class="game-icon">
+        🧠
+    </div>
+
+    <h3>
+        Quiz Pintar
+    </h3>
+
+    <p>
+        Jawab pertanyaan dan lihat jawaban sebenarnya setelah menjawab.
+    </p>
+
+    <button
+        class="play-btn"
+        onclick="openGame('quiz')">
+
+        MAIN SEKARANG
+
+    </button>
+
+</div>
+
+
+<div class="game-card">
+
+    <div class="game-icon">
+        🧩
+    </div>
+
+    <h3>
+        Memory Match
+    </h3>
+
+    <p>
+        Cari semua pasangan emoji.
+    </p>
+
+    <button
+        class="play-btn"
+        onclick="openGame('memory')">
+
+        MAIN SEKARANG
+
+    </button>
+
+</div>
+
+
+<div class="game-card">
+
+    <div class="game-icon">
+        🎯
+    </div>
+
+    <h3>
+        Target Hunter
+    </h3>
+
+    <p>
+        Klik target sebanyak mungkin sebelum waktu habis.
+    </p>
+
+    <button
+        class="play-btn"
+        onclick="openGame('target')">
+
+        MAIN SEKARANG
+
+    </button>
+
+</div>
+
+
+<div class="game-card">
+
+    <div class="game-icon">
+        ⚡
+    </div>
+
+    <h3>
+        Reflex Rush
+    </h3>
+
+    <p>
+        Uji kecepatan reaksimu.
+    </p>
+
+    <button
+        class="play-btn"
+        onclick="openGame('reflex')">
+
+        MAIN SEKARANG
+
+    </button>
+
+</div>
+
+
+<div class="game-card">
+
+    <div class="game-icon">
+        🔢
+    </div>
+
+    <h3>
+        Number Guess
+    </h3>
+
+    <p>
+        Tebak angka rahasia.
+    </p>
+
+    <button
+        class="play-btn"
+        onclick="openGame('guess')">
+
+        MAIN SEKARANG
+
+    </button>
+
+</div>
+
+
+<div class="game-card">
+
+    <div class="game-icon">
+        🌈
+    </div>
+
+    <h3>
+        Color Challenge
+    </h3>
+
+    <p>
+        Tebak warna dengan benar.
+    </p>
+
+    <button
+        class="play-btn"
+        onclick="openGame('color')">
+
+        MAIN SEKARANG
+
+    </button>
+
+</div>
+
+
+<div class="game-card">
+
+    <div class="game-icon">
+        🧮
+    </div>
+
+    <h3>
+        Math Rush
+    </h3>
+
+    <p>
+        Selesaikan matematika sebelum waktu habis.
+    </p>
+
+    <button
+        class="play-btn"
+        onclick="openGame('math')">
+
+        MAIN SEKARANG
+
+    </button>
+
+</div>
+
+
+<div class="game-card">
+
+    <div class="game-icon">
+        🔐
+    </div>
+
+    <h3>
+        Sequence Master
+    </h3>
+
+    <p>
+        Ingat dan ulangi urutan simbol.
+    </p>
+
+    <button
+        class="play-btn"
+        onclick="openGame('sequence')">
+
+        MAIN SEKARANG
+
+    </button>
+
+</div>
+
+
+<div class="game-card">
+
+    <div class="game-icon">
+        🍀
+    </div>
+
+    <h3>
+        Lucky Spin
+    </h3>
+
+    <p>
+        Putar roda dan dapatkan bonus.
+    </p>
+
+    <button
+        class="play-btn"
+        onclick="openGame('spin')">
+
+        MAIN SEKARANG
+
+    </button>
+
+</div>
+
+
+</div>
+
+
+<!-- ==============================
+     ACHIEVEMENT
+============================== -->
+
+<h2 class="section-title">
+    🏅 Achievement
+</h2>
+
+<div class="achievements">
+
+    <div
+        class="achievement"
+        id="ach10">
+
+        🥉
+        <b>
+            First Step
+        </b>
+
+        <p>
+            Mainkan 1 game.
+        </p>
+
+    </div>
+
+
+    <div
+        class="achievement locked"
+        id="ach100">
+
+        🥈
+        <b>
+            Score Hunter
+        </b>
+
+        <p>
+            Dapatkan 100 score.
+        </p>
+
+    </div>
+
+
+    <div
+        class="achievement locked"
+        id="ach500">
+
+        🥇
+        <b>
+            Pro Gamer
+        </b>
+
+        <p>
+            Dapatkan 500 score.
+        </p>
+
+    </div>
+
+</div>
+
+
+<!-- ==============================
+     LEADERBOARD
+============================== -->
+
+<h2 class="section-title">
+    🏆 Leaderboard
+</h2>
+
+<div class="leaderboard">
+
+    <div id="leaderboardList">
+
+        Belum ada pemain.
+
+    </div>
+
+</div>
+
+
+<!-- ==============================
+     DEVELOPER
+============================== -->
+
+<section id="developerSection">
+
+    <h2 class="section-title">
+        🛠️ Developer Control Panel
+    </h2>
+
+    <div class="dev-panel">
+
+        <h3>
+            👑 Developer Mode
+        </h3>
+
+        <p>
+            Panel khusus Athena.
+        </p>
+
+        <br>
+
+        <div class="dev-grid">
+
+            <input
+                id="devScore"
+                type="number"
+                placeholder="Score">
+
+            <input
+                id="devCoins"
+                type="number"
+                placeholder="Coins">
+
+            <button onclick="devAddScore()">
+                + Score
+            </button>
+
+            <button onclick="devAddCoins()">
+                + Coins
+            </button>
+
+            <button onclick="devSetScore()">
+                Set Score
+            </button>
+
+            <button onclick="devSetCoins()">
+                Set Coins
+            </button>
+
+            <button onclick="devReward()">
+                🎁 Bonus
+            </button>
+
+            <button onclick="showAllPlayers()">
+                👥 Semua Pemain
+            </button>
+
+            <button onclick="clearLeaderboard()">
+                🗑️ Hapus Leaderboard
+            </button>
+
+            <button onclick="exportData()">
+                💾 Export Data
+            </button>
+
+        </div>
+
+        <div
+            id="devOutput"
+            class="result">
+        </div>
+
+    </div>
+
+</section>
+
+
+</main>
+
+
+<footer>
+
+    <b>
+        ATHENA GAME UNIVERSE
+    </b>
+
+    <br>
+
+    Developer:
+    Athena 🧑‍💻
+
+    ·
+
+    Owner:
+    Irwan 👑
+
+    <br>
+
+    HTML • CSS • JavaScript
+
+</footer>
+
+
+<!-- ==============================
+     MODAL
+============================== -->
+
+<div
+    class="modal"
+    id="modal">
+
+    <div class="game-window">
+
+        <div class="game-header">
+
+            <h2 id="gameTitle">
+                Game
+            </h2>
+
+            <button
+                class="close"
+                onclick="closeGame()">
+
+                ✕
+
+            </button>
+
+        </div>
+
+        <div id="gameContent"></div>
+
+    </div>
+
+</div>
+
+
+<div id="toast">
+    Saved
+</div>
+
+
+<script>
+
+/* =========================================================
+   DATABASE LOCAL REAL-TIME
+========================================================= */
+
+const DB_KEY="ATHENA_GAME_DATABASE_V4";
+
+let db=JSON.parse(
+    localStorage.getItem(DB_KEY)
+) || {
+
+    players:{},
+
+    settings:{
+        dark:false,
+        sound:true
+    }
+
+};
+
+
+let currentPlayer=null;
+
+let activeGame=null;
+
+let gameRewarded=false;
+
+let sessionID=null;
+
+
+/* =========================================================
+   SAVE REAL TIME
+========================================================= */
+
+function saveDB(){
+
+    localStorage.setItem(
+        DB_KEY,
+        JSON.stringify(db)
+    );
+
+    updateUI();
+
+    renderLeaderboard();
+
+}
+
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+let toastTimer;
+
+function toast(message){
+
+    const t=document.getElementById("toast");
+
+    t.textContent=message;
+
+    t.classList.add("show");
+
+    clearTimeout(toastTimer);
+
+    toastTimer=setTimeout(()=>{
+
+        t.classList.remove("show");
+
+    },1800);
+
+}
+
+
+/* =========================================================
+   GET CURRENT PLAYER
+========================================================= */
+
+function getPlayer(){
+
+    if(!currentPlayer)return null;
+
+    return db.players[currentPlayer];
+}
+
+
+/* =========================================================
+   START SYSTEM
+========================================================= */
+
+function startGameSystem(){
+
+    let name=
+        document
+        .getElementById("playerNameInput")
+        .value
+        .trim();
+
+    let kelas=
+        document
+        .getElementById("playerClassInput")
+        .value
+        .trim();
+
+
+    if(!name || !kelas){
+
+        alert(
+            "Nama dan kelas wajib diisi."
+        );
+
+        return;
+
+    }
+
+
+    name=name.replace(
+        /[<>]/g,
+        ""
+    );
+
+    kelas=kelas.replace(
+        /[<>]/g,
+        ""
+    );
+
+
+    currentPlayer=
+        name.toLowerCase()+"_"+kelas.toLowerCase();
+
+
+    if(!db.players[currentPlayer]){
+
+        db.players[currentPlayer]={
+
+            name:name,
+
+            class:kelas,
+
+            score:0,
+
+            coins:0,
+
+            level:1,
+
+            played:0,
+
+            games:{},
+
+            achievements:[],
+
+            createdAt:Date.now(),
+
+            updatedAt:Date.now()
+
+        };
+
+    }
+
+
+    currentPlayerData();
+
+    saveDB();
+
+    showLoading();
+
+}
+
+
+/* =========================================================
+   CURRENT PLAYER
+========================================================= */
+
+function currentPlayerData(){
+
+    let p=getPlayer();
+
+    if(!p)return;
+
+    p.updatedAt=Date.now();
+
+}
+
+
+/* =========================================================
+   LOADING SCREEN
+========================================================= */
+
+function showLoading(){
+
+    document
+        .getElementById("loginScreen")
+        .style.display="none";
+
+    document
+        .getElementById("loadingScreen")
+        .style.display="flex";
+
+
+    const progress=
+        document.getElementById(
+            "loadingProgress"
+        );
+
+    const status=
+        document.getElementById(
+            "loadingStatus"
+        );
+
+
+    let start=Date.now();
+
+    let duration=4000;
+
+
+    const messages=[
+
+        "Memuat database pemain...",
+
+        "Menyiapkan mini games...",
+
+        "Mengaktifkan anti-cheat...",
+
+        "Memuat leaderboard...",
+
+        "Sinkronisasi progres...",
+
+        "Game siap dimainkan!"
+
+    ];
+
+
+    let interval=setInterval(()=>{
+
+        let elapsed=
+            Date.now()-start;
+
+        let percent=
+            Math.min(
+                100,
+                elapsed/duration*100
+            );
+
+        progress.style.width=
+            percent+"%";
+
+
+        let index=
+            Math.min(
+                messages.length-1,
+                Math.floor(
+                    percent/
+                    100*
+                    messages.length
+                )
+            );
+
+        status.textContent=
+            messages[index];
+
+
+        if(percent>=100){
+
+            clearInterval(interval);
+
+            finishLoading();
+
+        }
+
+    },50);
+
+}
+
+
+/* =========================================================
+   FINISH LOADING
+========================================================= */
+
+function finishLoading(){
+
+    document
+        .getElementById(
+            "loadingScreen"
+        )
+        .style.display="none";
+
+
+    updateUI();
+
+    renderLeaderboard();
+
+    checkDeveloper();
+
+    toast(
+        "Selamat datang, "+
+        getPlayer().name+"!"
+    );
+
+}
+
+
+/* =========================================================
+   UPDATE UI
+========================================================= */
+
+function updateUI(){
+
+    let p=getPlayer();
+
+    if(!p)return;
+
+
+    p.level=
+        Math.floor(
+            p.score/100
+        )+1;
+
+
+    document.getElementById(
+        "score"
+    ).textContent=p.score;
+
+
+    document.getElementById(
+        "coins"
+    ).textContent=p.coins;
+
+
+    document.getElementById(
+        "level"
+    ).textContent=p.level;
+
+
+    document.getElementById(
+        "played"
+    ).textContent=p.played;
+
+
+    document.getElementById(
+        "playerDisplay"
+    ).textContent=
+        p.name+
+        " • "+
+        p.class;
+
+
+    document
+        .getElementById("ach100")
+        .classList.toggle(
+            "locked",
+            p.score<100
+        );
+
+
+    document
+        .getElementById("ach500")
+        .classList.toggle(
+            "locked",
+            p.score<500
+        );
+
+}
+
+
+/* =========================================================
+   REWARD SYSTEM
+   ANTI DUPLICATE REWARD
+========================================================= */
+
+function reward(score,coins,gameName){
+
+    if(gameRewarded)return;
+
+    gameRewarded=true;
+
+
+    let p=getPlayer();
+
+    if(!p)return;
+
+
+    score=Math.max(
+        0,
+        Math.floor(score)
+    );
+
+    coins=Math.max(
+        0,
+        Math.floor(coins)
+    );
+
+
+    p.score+=score;
+
+    p.coins+=coins;
+
+    p.played++;
+
+    p.updatedAt=Date.now();
+
+
+    if(!p.games[gameName]){
+
+        p.games[gameName]=0;
+
+    }
+
+    p.games[gameName]++;
+
+
+    saveDB();
+
+    celebrate();
+
+}
+
+
+/* =========================================================
+   GAME SESSION
+========================================================= */
+
+function createGameSession(type){
+
+    activeGame=type;
+
+    gameRewarded=false;
+
+    sessionID=
+        Date.now()+
+        "_" +
+        Math.random()
+        .toString(36)
+        .slice(2);
+
+}
+
+
+/* =========================================================
+   OPEN GAME
+========================================================= */
+
+function openGame(type){
+
+    createGameSession(type);
+
+    document
+        .getElementById("modal")
+        .classList.add("show");
+
+
+    if(type==="quiz")
+        quizGame();
+
+    if(type==="memory")
+        memoryGame();
+
+    if(type==="target")
+        targetGame();
+
+    if(type==="reflex")
+        reflexGame();
+
+    if(type==="guess")
+        guessGame();
+
+    if(type==="color")
+        colorGame();
+
+    if(type==="math")
+        mathGame();
+
+    if(type==="sequence")
+        sequenceGame();
+
+    if(type==="spin")
+        spinGame();
+
+}
+
+
+/* =========================================================
+   CLOSE GAME
+========================================================= */
+
+function closeGame(){
+
+    stopAllTimers();
+
+    document
+        .getElementById("modal")
+        .classList.remove("show");
+
+    activeGame=null;
+
+    sessionID=null;
+
+}
+
+
+/* =========================================================
+   AUTO CLOSE
+========================================================= */
+
+function finishGame(message){
+
+    toast(message);
+
+    setTimeout(()=>{
+
+        closeGame();
+
+    },1500);
+
+}
+
+
+/* =========================================================
+   STOP TIMERS
+========================================================= */
+
+let targetTimer=null;
+let reflexTimer=null;
+let mathTimer=null;
+let sequenceTimer=null;
+
+
+function stopAllTimers(){
+
+    if(targetTimer)
+        clearInterval(targetTimer);
+
+    if(reflexTimer)
+        clearTimeout(reflexTimer);
+
+    if(mathTimer)
+        clearInterval(mathTimer);
+
+    if(sequenceTimer)
+        clearTimeout(sequenceTimer);
+
+
+    targetTimer=null;
+    reflexTimer=null;
+    mathTimer=null;
+    sequenceTimer=null;
+
+}
+
+
+/* =========================================================
+   GAME AREA
+========================================================= */
+
+function setGame(title,html){
+
+    document
+        .getElementById("gameTitle")
+        .textContent=title;
+
+
+    document
+        .getElementById("gameContent")
+        .innerHTML=
+        `<div class="game-area">
+            ${html}
+        </div>`;
+
+}
+
+
+/* =========================================================
+   QUIZ
+========================================================= */
+
+const questions=[
+
+    {
+        q:"Planet terbesar di Tata Surya adalah...",
+        a:[
+            "Mars",
+            "Jupiter",
+            "Venus",
+            "Merkurius"
+        ],
+        c:1
+    },
+
+    {
+        q:"Hasil dari 12 × 8 adalah...",
+        a:[
+            "86",
+            "96",
+            "108",
+            "112"
+        ],
+        c:1
+    },
+
+    {
+        q:"Bahasa yang digunakan untuk membuat struktur halaman web adalah...",
+        a:[
+            "HTML",
+            "CSS",
+            "SQL",
+            "Python"
+        ],
+        c:0
+    },
+
+    {
+        q:"Hewan yang mengalami metamorfosis sempurna adalah...",
+        a:[
+            "Kucing",
+            "Ayam",
+            "Kupu-kupu",
+            "Ikan"
+        ],
+        c:2
+    },
+
+    {
+        q:"Ibukota Indonesia saat ini adalah...",
+        a:[
+            "Bandung",
+            "Jakarta",
+            "Surabaya",
+            "Medan"
+        ],
+        c:1
+    }
+
+];
+
+
+let quizIndex=0;
+let quizScore=0;
+let quizAnswered=false;
+
+
+function quizGame(){
+
+    quizIndex=0;
+
+    quizScore=0;
+
+    quizAnswered=false;
+
+    showQuiz();
+
+}
+
+
+function showQuiz(){
+
+    quizAnswered=false;
+
+    let q=
+        questions[quizIndex];
+
+
+    setGame(
+        "🧠 Quiz Pintar",
+
+        `
+
+        <div class="progress">
+
+            <div
+                style="
+                width:
+                ${quizIndex/questions.length*100}%
+                ">
+            </div>
+
+        </div>
+
+        <p style="text-align:center">
+
+            Soal
+            ${quizIndex+1}
+            /
+            ${questions.length}
+
+        </p>
+
+        <div class="quiz-question">
+
+            ${q.q}
+
+        </div>
+
+        <div class="answers">
+
+            ${q.a.map((x,i)=>`
+
+                <button
+                    class="answer"
+                    id="answer${i}"
+                    onclick="answerQuiz(${i})">
+
+                    ${x}
+
+                </button>
+
+            `).join("")}
+
+        </div>
+
+        <div
+            class="result"
+            id="quizResult">
+        </div>
+
+        `
+    );
+
+}
+
+
+function answerQuiz(index){
+
+    if(quizAnswered)return;
+
+    quizAnswered=true;
+
+
+    let q=
+        questions[quizIndex];
+
+
+    let buttons=
+        document.querySelectorAll(
+            ".answer"
+        );
+
+
+    buttons.forEach(
+        b=>{
+            b.classList.add("locked");
+        }
+    );
+
+
+    buttons[q.c]
+        .classList.add("correct");
+
+
+    if(index===q.c){
+
+        quizScore+=20;
+
+        beep(800);
+
+        document
+            .getElementById(
+                "quizResult"
+            )
+            .innerHTML=
+            "🎉 BENAR!<br>"+
+            "Jawaban sebenarnya: "+
+            "<b>"+q.a[q.c]+"</b>";
+
+    }else{
+
+        buttons[index]
+            .classList.add("wrong");
+
+        beep(200);
+
+        document
+            .getElementById(
+                "quizResult"
+            )
+            .innerHTML=
+            "❌ SALAH!<br>"+
+            "Jawaban sebenarnya: "+
+            "<b>"+q.a[q.c]+"</b>";
+
+    }
+
+
+    setTimeout(()=>{
+
+        quizIndex++;
+
+
+        if(
+            quizIndex>=
+            questions.length
+        ){
+
+            reward(
+                quizScore,
+                Math.floor(
+                    quizScore/10
+                ),
+                "Quiz Pintar"
+            );
+
+
+            setGame(
+                "🏆 Quiz Selesai",
+
+                `
+
+                <div style="text-align:center">
+
+                    <div
+                        style="font-size:70px">
+                        🎉
+                    </div>
+
+                    <h2>
+                        Skor:
+                        ${quizScore}
+                    </h2>
+
+                    <p>
+                        Jawaban sudah
+                        dikunci dan diperiksa.
+                    </p>
+
+                    <p>
+                        +${Math.floor(
+                            quizScore/10
+                        )}
+                        coins
+                    </p>
+
+                </div>
+
+                `
+            );
+
+
+            setTimeout(
+                closeGame,
+                1800
+            );
+
+
+        }else{
+
+            showQuiz();
+
+        }
+
+    },1200);
+
+}
+
+
+/* =========================================================
+   MEMORY
+========================================================= */
+
+let memoryFirst=null;
+let memoryLock=false;
+let memoryPairs=0;
+
+
+function memoryGame(){
+
+    const icons=[
+        "🐱","🐶","🐸",
+        "🦊","🐼","🐨",
+        "🐱","🐶","🐸",
+        "🦊","🐼","🐨"
+    ];
+
+
+    icons.sort(
+        ()=>Math.random()-.5
+    );
+
+
+    memoryFirst=null;
+
+    memoryLock=false;
+
+    memoryPairs=0;
+
+
+    setGame(
+        "🧩 Memory Match",
+
+        `
+
+        <p style="text-align:center">
+            Cari semua pasangan emoji.
+        </p>
+
+        <div class="memory-grid">
+
+            ${icons.map((x,i)=>`
+
+                <button
+                    class="memory-card"
+                    id="mem${i}"
+                    data-value="${x}"
+                    onclick="flipMemory(${i})">
+
+                    ${x}
+
+                </button>
+
+            `).join("")}
+
+        </div>
+
+        <div
+            class="result"
+            id="memoryResult">
+
+            Pasangan:
+            0/6
+
+        </div>
+
+        `
+    );
+
+}
+
+
+function flipMemory(index){
+
+    if(memoryLock)return;
+
+    let card=
+        document.getElementById(
+            "mem"+index
+        );
+
+
+    if(
+        card.classList.contains("open") ||
+        card.classList.contains("done")
+    )return;
+
+
+    card.classList.add("open");
+
+
+    if(memoryFirst===null){
+
+        memoryFirst=index;
+
+        return;
+
+    }
+
+
+    let first=
+        document.getElementById(
+            "mem"+memoryFirst
+        );
+
+
+    if(
+        first.dataset.value===
+        card.dataset.value
+    ){
+
+        first.classList.add("done");
+
+        card.classList.add("done");
+
+        memoryPairs++;
+
+        beep(700);
+
+        document
+            .getElementById(
+                "memoryResult"
+            )
+            .textContent=
+            `Pasangan:
+             ${memoryPairs}/6`;
+
+
+        memoryFirst=null;
+
+
+        if(memoryPairs===6){
+
+            reward(
+                100,
+                25,
+                "Memory Match"
+            );
+
+
+            document
+                .getElementById(
+                    "memoryResult"
+                )
+                .textContent=
+                "🏆 Sempurna! +100 score";
+
+
+            setTimeout(
+                closeGame,
+                1500
+            );
+
+        }
+
+    }else{
+
+        memoryLock=true;
+
+
+        setTimeout(()=>{
+
+            first.classList.remove(
+                "open"
+            );
+
+            card.classList.remove(
+                "open"
+            );
+
+
+            memoryFirst=null;
+
+            memoryLock=false;
+
+        },700);
+
+    }
+
+}
+
+
+/* =========================================================
+   TARGET
+========================================================= */
+
+function targetGame(){
+
+    let score=0;
+
+    let time=15;
+
+
+    setGame(
+        "🎯 Target Hunter",
+
+        `
+
+        <div
+            class="timer"
+            id="targetTime">
+
+            15
+
+        </div>
+
+        <div
+            class="target-zone"
+            id="targetZone">
+
+            <button
+                class="click-target"
+                id="target"
+                onclick="hitTarget()">
+
+                🎯
+
+            </button>
+
+        </div>
+
+        <div class="result">
+
+            Score:
+            <span id="targetScore">
+                0
+            </span>
+
+        </div>
+
+        `
+    );
+
+
+    window.targetScore=0;
+
+    moveTarget();
+
+
+    targetTimer=
+        setInterval(()=>{
+
+            time--;
+
+
+            let timer=
+                document.getElementById(
+                    "targetTime"
+                );
+
+
+            if(timer)
+                timer.textContent=time;
+
+
+            if(time<=0){
+
+                clearInterval(
+                    targetTimer
+                );
+
+
+                reward(
+                    window.targetScore,
+                    Math.floor(
+                        window.targetScore/5
+                    ),
+                    "Target Hunter"
+                );
+
+
+                finishGame(
+                    "🎯 Target selesai!"
+                );
+
+            }
+
+        },1000);
+
+}
+
+
+function moveTarget(){
+
+    let zone=
+        document.getElementById(
+            "targetZone"
+        );
+
+    let target=
+        document.getElementById(
+            "target"
+        );
+
+
+    if(!zone || !target)return;
+
+
+    target.style.display="block";
+
+
+    target.style.left=
+        Math.random()*
+        Math.max(
+            0,
+            zone.clientWidth-75
+        )+
+        "px";
+
+
+    target.style.top=
+        Math.random()*
+        Math.max(
+            0,
+            zone.clientHeight-75
+        )+
+        "px";
+
+}
+
+
+function hitTarget(){
+
+    if(activeGame!=="target")
+        return;
+
+
+    window.targetScore+=10;
+
+
+    document
+        .getElementById(
+            "targetScore"
+        )
+        .textContent=
+        window.targetScore;
+
+
+    beep(900);
+
+
+    moveTarget();
+
+}
+
+
+/* =========================================================
+   REFLEX
+========================================================= */
+
+let reflexReady=false;
+let reflexStartTime=0;
+
+
+function reflexGame(){
+
+    setGame(
+        "⚡ Reflex Rush",
+
+        `
+
+        <div
+            id="reflexBox"
+            class="reflex"
+            onclick="reflexClick()">
+
+            Tekan START.
+
+        </div>
+
+        <div
+            class="result"
+            id="reflexResult">
+        </div>
+
+        <button
+            class="game-btn"
+            onclick="startReflex()">
+
+            START
+
+        </button>
+
+        `
+    );
+
+}
+
+
+function startReflex(){
+
+    if(reflexTimer)
+        clearTimeout(reflexTimer);
+
+
+    let box=
+        document.getElementById(
+            "reflexBox"
+        );
+
+
+    box.textContent=
+        "Tunggu... 😶";
+
+
+    box.style.background=
+        "#fde68a";
+
+
+    reflexReady=false;
+
+
+    reflexTimer=
+        setTimeout(()=>{
+
+            if(activeGame!=="reflex")
+                return;
+
+
+            box.textContent=
+                "KLIK SEKARANG! 🟢";
+
+
+            box.style.background=
+                "#86efac";
+
+
+            reflexReady=true;
+
+            reflexStartTime=
+                performance.now();
+
+        },1000+Math.random()*3000);
+
+}
+
+
+function reflexClick(){
+
+    if(!reflexReady){
+
+        document
+            .getElementById(
+                "reflexResult"
+            )
+            .textContent=
+            "❌ Terlalu cepat!";
+
+        clearTimeout(reflexTimer);
+
+        return;
+
+    }
+
+
+    let reaction=
+        Math.round(
+            performance.now()-
+            reflexStartTime
+        );
+
+
+    let points=
+        Math.max(
+            10,
+            100-
+            Math.floor(
+                reaction/10
+            )
+        );
+
+
+    document
+        .getElementById(
+            "reflexResult"
+        )
+        .innerHTML=
+        `⚡ ${reaction} ms<br>
+         +${points} score`;
+
+
+    reward(
+        points,
+        Math.floor(points/10),
+        "Reflex Rush"
+    );
+
+
+    reflexReady=false;
+
+
+    setTimeout(
+        closeGame,
+        1200
+    );
+
+}
+
+
+/* =========================================================
+   NUMBER GUESS
+========================================================= */
+
+let guessNumber=0;
+let guessAttempts=0;
+let guessFinished=false;
+
+
+function guessGame(){
+
+    guessNumber=
+        Math.floor(
+            Math.random()*100
+        )+1;
+
+
+    guessAttempts=0;
+
+    guessFinished=false;
+
+
+    setGame(
+        "🔢 Number Guess",
+
+        `
+
+        <p style="text-align:center">
+
+            Aku memilih angka
+            1–100.
+
+        </p>
+
+        <input
+            id="guessInput"
+            type="number"
+            min="1"
+            max="100"
+            placeholder="Masukkan angka...">
+
+        <button
+            class="game-btn"
+            onclick="checkGuess()">
+
+            TEBAK
+
+        </button>
+
+        <div
+            class="result"
+            id="guessResult">
+
+            Percobaan: 0
+
+        </div>
+
+        `
+    );
+
+}
+
+
+function checkGuess(){
+
+    if(guessFinished)return;
+
+
+    let input=
+        document.getElementById(
+            "guessInput"
+        );
+
+
+    let value=
+        parseInt(input.value);
+
+
+    if(
+        !value ||
+        value<1 ||
+        value>100
+    )return;
+
+
+    guessAttempts++;
+
+
+    let result=
+        document.getElementById(
+            "guessResult"
+        );
+
+
+    if(value===guessNumber){
+
+        guessFinished=true;
+
+
+        let points=
+            Math.max(
+                20,
+                100-
+                guessAttempts*10
+            );
+
+
+        result.innerHTML=
+            `🎉 BENAR!<br>
+             Angkanya:
+             <b>${guessNumber}</b><br>
+             +${points} score`;
+
+
+        reward(
+            points,
+            Math.floor(points/10),
+            "Number Guess"
+        );
+
+
+        input.disabled=true;
+
+
+        setTimeout(
+            closeGame,
+            1500
+        );
+
+
+    }else if(
+        value<guessNumber
+    ){
+
+        result.textContent=
+            "⬆️ Terlalu kecil!";
+
+
+    }else{
+
+        result.textContent=
+            "⬇️ Terlalu besar!";
+
+    }
+
+}
+
+
+/* =========================================================
+   COLOR
+========================================================= */
+
+let colorFinished=false;
+
+
+function colorGame(){
+
+    const colors=[
+
+        {
+            name:"MERAH",
+            value:"#ff6b81"
+        },
+
+        {
+            name:"BIRU",
+            value:"#60a5fa"
+        },
+
+        {
+            name:"HIJAU",
+            value:"#4ade80"
+        },
+
+        {
+            name:"KUNING",
+            value:"#facc15"
+        },
+
+        {
+            name:"UNGU",
+            value:"#a78bfa"
+        },
+
+        {
+            name:"ORANYE",
+            value:"#fb923c"
+        }
+
+    ];
+
+
+    let chosen=
+        colors[
+            Math.floor(
+                Math.random()*
+                colors.length
+            )
+        ];
+
+
+    colorFinished=false;
+
+
+    window.correctColor=
+        chosen.name;
+
+
+    setGame(
+        "🌈 Color Challenge",
+
+        `
+
+        <p style="text-align:center">
+
+            Warna apakah ini?
+
+        </p>
+
+        <div
+            class="color-box"
+            style="
+            background:
+            ${chosen.value}">
+        </div>
+
+        <div style="text-align:center">
+
+            ${colors.map(c=>`
+
+                <button
+                    class="game-btn"
+                    onclick="
+                    checkColor(
+                    '${c.name}'
+                    )">
+
+                    ${c.name}
+
+                </button>
+
+            `).join("")}
+
+        </div>
+
+        <div
+            class="result"
+            id="colorResult">
+        </div>
+
+        `
+    );
+
+}
+
+
+function checkColor(answer){
+
+    if(colorFinished)return;
+
+
+    colorFinished=true;
+
+
+    let result=
+        document.getElementById(
+            "colorResult"
+        );
+
+
+    if(
+        answer===
+        window.correctColor
+    ){
+
+        result.innerHTML=
+            "🌈 BENAR!<br>"+
+            "Jawaban: "+
+            "<b>"+
+            window.correctColor+
+            "</b>";
+
+
+        reward(
+            50,
+            5,
+            "Color Challenge"
+        );
+
+
+        beep(800);
+
+    }else{
+
+        result.innerHTML=
+            "❌ SALAH!<br>"+
+            "Jawaban sebenarnya: "+
+            "<b>"+
+            window.correctColor+
+            "</b>";
+
+
+        beep(200);
+
+    }
+
+
+    setTimeout(
+        closeGame,
+        1500
+    );
+
+}
+
+
+/* =========================================================
+   MATH
+========================================================= */
+
+let mathAnswer=0;
+let mathFinished=false;
+
+
+function mathGame(){
+
+    let a=
+        Math.floor(
+            Math.random()*20
+        )+1;
+
+
+    let b=
+        Math.floor(
+            Math.random()*20
+        )+1;
+
+
+    mathAnswer=a+b;
+
+    mathFinished=false;
+
+
+    setGame(
+        "🧮 Math Rush",
+
+        `
+
+        <div
+            class="timer"
+            id="mathTimer">
+
+            10
+
+        </div>
+
+        <div
+            class="quiz-question">
+
+            ${a} + ${b} = ?
+
+        </div>
+
+        <input
+            id="mathInput"
+            type="number"
+            placeholder="Jawaban...">
+
+        <button
+            class="game-btn"
+            onclick="checkMath()">
+
+            JAWAB
+
+        </button>
+
+        <div
+            class="result"
+            id="mathResult">
+        </div>
+
+        `
+    );
+
+
+    let t=10;
+
+
+    mathTimer=
+        setInterval(()=>{
+
+            t--;
+
+
+            let timer=
+                document.getElementById(
+                    "mathTimer"
+                );
+
+
+            if(timer)
+                timer.textContent=t;
+
+
+            if(t<=0){
+
+                clearInterval(
+                    mathTimer
+                );
+
+
+                if(!mathFinished){
+
+                    mathFinished=true;
+
+
+                    let result=
+                        document.getElementById(
+                            "mathResult"
+                        );
+
+
+                    if(result){
+
+                        result.innerHTML=
+                            "⏰ Waktu habis!<br>"+
+                            "Jawaban sebenarnya: "+
+                            "<b>"+
+                            mathAnswer+
+                            "</b>";
+
+                    }
+
+                    setTimeout(
+                        closeGame,
+                        1500
+                    );
+
+                }
+
+            }
+
+        },1000);
+
+}
+
+
+function checkMath(){
+
+    if(mathFinished)return;
+
+
+    let value=
+        parseInt(
+            document
+            .getElementById(
+                "mathInput"
+            )
+            .value
+        );
+
+
+    mathFinished=true;
+
+
+    if(value===mathAnswer){
+
+        document
+            .getElementById(
+                "mathResult"
+            )
+            .innerHTML=
+            "🎉 BENAR!<br>"+
+            "+50 score";
+
+
+        reward(
+            50,
+            5,
+            "Math Rush"
+        );
+
+
+    }else{
+
+        document
+            .getElementById(
+                "mathResult"
+            )
+            .innerHTML=
+            "❌ SALAH!<br>"+
+            "Jawaban sebenarnya: "+
+            "<b>"+
+            mathAnswer+
+            "</b>";
+
+    }
+
+
+    clearInterval(
+        mathTimer
+    );
+
+
+    setTimeout(
+        closeGame,
+        1500
+    );
+
+}
+
+
+/* =========================================================
+   SEQUENCE
+========================================================= */
+
+let sequence=[];
+let userSequence=[];
+let sequenceFinished=false;
+
+
+function sequenceGame(){
+
+    sequence=[];
+
+    userSequence=[];
+
+    sequenceFinished=false;
+
+
+    setGame(
+        "🔐 Sequence Master",
+
+        `
+
+        <p style="text-align:center">
+
+            Ingat urutan emoji
+            yang muncul.
+
+        </p>
+
+        <div
+            class="sequence"
+            id="sequenceDisplay">
+        </div>
+
+        <div
+            class="sequence"
+            id="sequenceButtons">
+        </div>
+
+        <div
+            class="result"
+            id="sequenceResult">
+        </div>
+
+        <button
+            class="game-btn"
+            onclick="startSequence()">
+
+            MULAI
+
+        </button>
+
+        `
+    );
+
+}
+
+
+function startSequence(){
+
+    sequenceFinished=false;
+
+
+    sequence=[
+        "🍎",
+        "🍌",
+        "🍇",
+        "🍉",
+        "🍒"
+    ].sort(
+        ()=>Math.random()-.5
+    );
+
+
+    let display=
+        document.getElementById(
+            "sequenceDisplay"
+        );
+
+
+    display.innerHTML=
+        sequence
+        .map(
+            x=>
+            `<span>${x}</span>`
+        )
+        .join(" ");
+
+
+    document
+        .getElementById(
+            "sequenceButtons"
+        )
+        .innerHTML="";
+
+
+    sequenceTimer=
+        setTimeout(()=>{
+
+            display.innerHTML=
+                "❓ ❓ ❓ ❓ ❓";
+
+
+            let shuffled=
+                [...sequence].sort(
+                    ()=>Math.random()-.5
+                );
+
+
+            document
+                .getElementById(
+                    "sequenceButtons"
+                )
+                .innerHTML=
+                shuffled.map(
+                    x=>`
+
+                    <button
+                        class="seq-btn"
+                        onclick="
+                        sequenceClick(
+                        '${x}'
+                        )">
+
+                        ${x}
+
+                    </button>
+
+                    `
+                ).join("");
+
+
+            userSequence=[];
+
+        },1500);
+
+}
+
+
+function sequenceClick(x){
+
+    if(sequenceFinished)return;
+
+
+    userSequence.push(x);
+
+
+    let index=
+        userSequence.length-1;
+
+
+    if(
+        userSequence[index] !==
+        sequence[index]
+    ){
+
+        sequenceFinished=true;
+
+
+        document
+            .getElementById(
+                "sequenceResult"
+            )
+            .innerHTML=
+            "❌ Salah!";
+
+
+        beep(200);
+
+
+        setTimeout(
+            closeGame,
+            1200
+        );
+
+
+        return;
+
+    }
+
+
+    if(
+        userSequence.length===
+        sequence.length
+    ){
+
+        sequenceFinished=true;
+
+
+        document
+            .getElementById(
+                "sequenceResult"
+            )
+            .innerHTML=
+            "🎉 BENAR! +100 score";
+
+
+        reward(
+            100,
+            20,
+            "Sequence Master"
+        );
+
+
+        beep(1000);
+
+
+        setTimeout(
+            closeGame,
+            1500
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   SPIN
+========================================================= */
+
+let spinning=false;
+
+
+function spinGame(){
+
+    spinning=false;
+
+
+    setGame(
+        "🍀 Lucky Spin",
+
+        `
+
+        <div style="text-align:center">
+
+            <div
+                id="wheel"
+                style="
+                width:180px;
+                height:180px;
+                margin:20px auto;
+                border-radius:50%;
+                background:
+                conic-gradient(
+                    #ff8fc7 0deg 60deg,
+                    #a78bfa 60deg 120deg,
+                    #7dd3fc 120deg 180deg,
+                    #86efac 180deg 240deg,
+                    #fde68a 240deg 300deg,
+                    #fdba74 300deg 360deg
+                );
+                display:flex;
+                align-items:center;
+                justify-content:center;
+                font-size:50px;
+                transition:
+                transform 2s
+                cubic-bezier(
+                    .17,.67,.15,1
+                );
+                ">
+
+                🎁
+
+            </div>
+
+            <button
+                class="game-btn"
+                onclick="spinWheel()">
+
+                PUTAR!
+
+            </button>
+
+            <div
+                class="result"
+                id="spinResult">
+            </div>
+
+        </div>
+
+        `
+    );
+
+}
+
+
+function spinWheel(){
+
+    if(spinning)return;
+
+
+    spinning=true;
+
+
+    let wheel=
+        document.getElementById(
+            "wheel"
+        );
+
+
+    let rotation=
+        1440+
+        Math.floor(
+            Math.random()*720
+        );
+
+
+    wheel.style.transform=
+        `rotate(${rotation}deg)`;
+
+
+    setTimeout(()=>{
+
+        if(activeGame!=="spin")
+            return;
+
+
+        let rewards=[
+
+            [20,2],
+
+            [50,5],
+
+            [100,10],
+
+            [150,15],
+
+            [250,25]
+
+        ];
+
+
+        let rewardData=
+            rewards[
+                Math.floor(
+                    Math.random()*
+                    rewards.length
+                )
+            ];
+
+
+        reward(
+            rewardData[0],
+            rewardData[1],
+            "Lucky Spin"
+        );
+
+
+        document
+            .getElementById(
+                "spinResult"
+            )
+            .innerHTML=
+            `🎉 +${rewardData[0]}
+             score<br>
+             🪙 +${rewardData[1]}
+             coins`;
+
+
+        spinning=false;
+
+
+        setTimeout(
+            closeGame,
+            1500
+        );
+
+    },2100);
+
+}
+
+
+/* =========================================================
+   ANTI CHEAT
+========================================================= */
+
+let antiCheatWarning=false;
+
+
+/*
+   Jika pemain berpindah tab,
+   game aktif dihentikan.
+*/
+
+document.addEventListener(
+    "visibilitychange",
+    ()=>{
+
+        if(
+            document.hidden &&
+            activeGame
+        ){
+
+            antiCheatWarning=true;
+
+            stopAllTimers();
+
+            gameRewarded=true;
+
+            toast(
+                "⚠️ Game dihentikan karena tab berpindah."
+            );
+
+
+            setTimeout(
+                closeGame,
+                300
+            );
+
+        }
+
+    }
+);
+
+
+/*
+   Simpan saat browser akan ditutup.
+*/
+
+window.addEventListener(
+    "beforeunload",
+    ()=>{
+
+        saveDB();
+
+    }
+);
+
+
+/*
+   Simpan otomatis berkala.
+*/
+
+setInterval(
+    ()=>{
+        saveDB();
+    },
+    1000
+);
+
+
+/*
+   Sinkronisasi jika localStorage
+   berubah dari tab browser lain.
+*/
+
+window.addEventListener(
+    "storage",
+    event=>{
+
+        if(event.key===DB_KEY){
+
+            try{
+
+                db=
+                    JSON.parse(
+                        event.newValue
+                    ) || db;
+
+
+                updateUI();
+
+                renderLeaderboard();
+
+            }catch(e){}
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   LEADERBOARD
+========================================================= */
+
+function renderLeaderboard(){
+
+    let list=
+        document.getElementById(
+            "leaderboardList"
+        );
+
+
+    if(!list)return;
+
+
+    let players=
+        Object.values(
+            db.players
+        );
+
+
+    players.sort(
+        (a,b)=>
+            b.score-a.score
+    );
+
+
+    if(players.length===0){
+
+        list.innerHTML=
+            "Belum ada pemain.";
+
+        return;
+
+    }
+
+
+    list.innerHTML=
+        players
+        .slice(0,20)
+        .map(
+            (p,index)=>`
+
+            <div class="rank-row">
+
+                <div class="rank">
+
+                    ${
+                        index===0
+                        ?"🥇":
+                        index===1
+                        ?"🥈":
+                        index===2
+                        ?"🥉":
+                        "#"+(index+1)
+                    }
+
+                </div>
+
+                <div>
+
+                    <div class="player-name">
+
+                        ${escapeHTML(
+                            p.name
+                        )}
+
+                    </div>
+
+                    <div class="player-class">
+
+                        Kelas:
+                        ${escapeHTML(
+                            p.class
+                        )}
+
+                    </div>
+
+                </div>
+
+                <div class="rank-score">
+
+                    🏆
+                    ${p.score}
+
+                </div>
+
+                <div class="rank-games">
+
+                    🎮
+                    ${p.played}
+
+                </div>
+
+            </div>
+
+            `
+        )
+        .join("");
+
+}
+
+
+/* =========================================================
+   DEVELOPER MODE
+========================================================= */
+
+function checkDeveloper(){
+
+    let p=getPlayer();
+
+    if(!p)return;
+
+
+    const developerName=
+        p.name
+        .trim()
+        .toLowerCase()==="athena";
+
+
+    const developerClass=
+        p.class
+        .trim()
+        .toLowerCase()==="x-1";
+
+
+    if(
+        developerName &&
+        developerClass
+    ){
+
+        document
+            .getElementById(
+                "developerSection"
+            )
+            .style.display="block";
+
+
+        document
+            .getElementById(
+                "devOutput"
+            )
+            .innerHTML=
+            "👑 Developer Mode aktif.";
+
+    }
+
+}
+
+
+/*
+   Catatan:
+   Identitas Athena + X-1 hanya cocok
+   untuk developer mode lokal.
+   Ini BUKAN sistem keamanan server.
+*/
+
+
+function isDeveloper(){
+
+    let p=getPlayer();
+
+    if(!p)return false;
+
+
+    return(
+        p.name
+        .trim()
+        .toLowerCase()==="athena"
+        &&
+        p.class
+        .trim()
+        .toLowerCase()==="x-1"
+    );
+
+}
+
+
+function requireDeveloper(){
+
+    if(!isDeveloper()){
+
+        toast(
+            "Akses developer ditolak."
+        );
+
+        return false;
+
+    }
+
+    return true;
+
+}
+
+
+/* =========================================================
+   DEV ADD SCORE
+========================================================= */
+
+function devAddScore(){
+
+    if(!requireDeveloper())
+        return;
+
+
+    let amount=
+        parseInt(
+            document
+            .getElementById(
+                "devScore"
+            ).value
+        );
+
+
+    if(!amount)return;
+
+
+    getPlayer().score+=amount;
+
+    getPlayer().updatedAt=
+        Date.now();
+
+
+    saveDB();
+
+
+    toast(
+        "+"+
+        amount+
+        " score"
+    );
+
+}
+
+
+/* =========================================================
+   DEV ADD COINS
+========================================================= */
+
+function devAddCoins(){
+
+    if(!requireDeveloper())
+        return;
+
+
+    let amount=
+        parseInt(
+            document
+            .getElementById(
+                "devCoins"
+            ).value
+        );
+
+
+    if(!amount)return;
+
+
+    getPlayer().coins+=amount;
+
+    getPlayer().updatedAt=
+        Date.now();
+
+
+    saveDB();
+
+
+    toast(
+        "+"+
+        amount+
+        " coins"
+    );
+
+}
+
+
+/* =========================================================
+   DEV SET SCORE
+========================================================= */
+
+function devSetScore(){
+
+    if(!requireDeveloper())
+        return;
+
+
+    let amount=
+        parseInt(
+            document
+            .getElementById(
+                "devScore"
+            ).value
+        );
+
+
+    if(isNaN(amount))return;
+
+
+    getPlayer().score=
+        Math.max(
+            0,
+            amount
+        );
+
+
+    getPlayer().updatedAt=
+        Date.now();
+
+
+    saveDB();
+
+
+    toast(
+        "Score diubah."
+    );
+
+}
+
+
+/* =========================================================
+   DEV SET COINS
+========================================================= */
+
+function devSetCoins(){
+
+    if(!requireDeveloper())
+        return;
+
+
+    let amount=
+        parseInt(
+            document
+            .getElementById(
+                "devCoins"
+            ).value
+        );
+
+
+    if(isNaN(amount))return;
+
+
+    getPlayer().coins=
+        Math.max(
+            0,
+            amount
+        );
+
+
+    getPlayer().updatedAt=
+        Date.now();
+
+
+    saveDB();
+
+
+    toast(
+        "Coins diubah."
+    );
+
+}
+
+
+/* =========================================================
+   DEV BONUS
+========================================================= */
+
+function devReward(){
+
+    if(!requireDeveloper())
+        return;
+
+
+    getPlayer().score+=500;
+
+    getPlayer().coins+=100;
+
+    getPlayer().updatedAt=
+        Date.now();
+
+
+    saveDB();
+
+
+    celebrate();
+
+
+    toast(
+        "🎁 Bonus developer +500 score +100 coins"
+    );
+
+}
+
+
+/* =========================================================
+   SHOW ALL PLAYERS
+========================================================= */
+
+function showAllPlayers(){
+
+    if(!requireDeveloper())
+        return;
+
+
+    let players=
+        Object.values(
+            db.players
+        );
+
+
+    document
+        .getElementById(
+            "devOutput"
+        )
+        .innerHTML=
+        `👥 Total pemain:
+         <b>${players.length}</b>`;
+
+}
+
+
+/* =========================================================
+   CLEAR LEADERBOARD
+========================================================= */
+
+function clearLeaderboard(){
+
+    if(!requireDeveloper())
+        return;
+
+
+    if(
+        !confirm(
+            "Hapus SEMUA pemain?"
+        )
+    )return;
+
+
+    db.players={};
+
+
+    saveDB();
+
+
+    toast(
+        "Leaderboard dikosongkan."
+    );
+
+}
+
+
+/* =========================================================
+   EXPORT DATA
+========================================================= */
+
+function exportData(){
+
+    let dataString=
+        JSON.stringify(
+            db,
+            null,
+            2
+        );
+
+
+    let blob=
+        new Blob(
+            [dataString],
+            {
+                type:
+                "application/json"
+            }
+        );
+
+
+    let url=
+        URL.createObjectURL(
+            blob
+        );
+
+
+    let a=
+        document.createElement(
+            "a"
+        );
+
+
+    a.href=url;
+
+    a.download=
+        "athena-game-backup.json";
+
+
+    a.click();
+
+
+    URL.revokeObjectURL(
+        url
+    );
+
+
+    toast(
+        "Backup berhasil dibuat."
+    );
+
+}
+
+
+/* =========================================================
+   RESET PLAYER
+========================================================= */
+
+function resetCurrentPlayer(){
+
+    if(!currentPlayer)return;
+
+
+    if(
+        !confirm(
+            "Reset progres pemain ini?"
+        )
+    )return;
+
+
+    db.players[
+        currentPlayer
+    ]={
+
+        name:
+            getPlayer().name,
+
+        class:
+            getPlayer().class,
+
+        score:0,
+
+        coins:0,
+
+        level:1,
+
+        played:0,
+
+        games:{},
+
+        achievements:[],
+
+        createdAt:Date.now(),
+
+        updatedAt:Date.now()
+
+    };
+
+
+    saveDB();
+
+
+    toast(
+        "Progres berhasil direset."
+    );
+
+}
+
+
+/* =========================================================
+   DARK MODE
+========================================================= */
+
+function toggleDark(){
+
+    db.settings.dark=
+        !db.settings.dark;
+
+
+    document.body
+        .classList.toggle(
+            "dark",
+            db.settings.dark
+        );
+
+
+    saveDB();
+
+}
+
+
+/* =========================================================
+   SOUND
+========================================================= */
+
+let audioCtx;
+
+
+function beep(
+    freq=500,
+    duration=.08
+){
+
+    if(
+        !db.settings.sound
+    )return;
+
+
+    audioCtx=
+        audioCtx ||
+        new (
+            window.AudioContext ||
+            window.webkitAudioContext
+        )();
+
+
+    let osc=
+        audioCtx.createOscillator();
+
+
+    let gain=
+        audioCtx.createGain();
+
+
+    osc.frequency.value=
+        freq;
+
+
+    osc.connect(gain);
+
+    gain.connect(
+        audioCtx.destination
+    );
+
+
+    gain.gain.setValueAtTime(
+        .06,
+        audioCtx.currentTime
+    );
+
+
+    osc.start();
+
+
+    gain.gain.exponentialRampToValueAtTime(
+        .001,
+        audioCtx.currentTime+
+        duration
+    );
+
+
+    osc.stop(
+        audioCtx.currentTime+
+        duration
+    );
+
+}
+
+
+function toggleSound(){
+
+    db.settings.sound=
+        !db.settings.sound;
+
+
+    saveDB();
+
+
+    if(
+        db.settings.sound
+    ){
+
+        beep(700,.1);
+
+    }
+
+}
+
+
+/* =========================================================
+   PARTICLES
+========================================================= */
+
+const particleIcons=[
+    "✨",
+    "💖",
+    "⭐",
+    "🌸",
+    "🍭",
+    "🦄",
+    "🌈",
+    "💫"
+];
+
+
+for(
+    let i=0;
+    i<35;
+    i++
+){
+
+    let p=
+        document.createElement(
+            "div"
+        );
+
+
+    p.className=
+        "particle";
+
+
+    p.textContent=
+        particleIcons[
+            Math.floor(
+                Math.random()*
+                particleIcons.length
+            )
+        ];
+
+
+    p.style.left=
+        Math.random()*100+
+        "%";
+
+
+    p.style.animationDelay=
+        Math.random()*8+
+        "s";
+
+
+    p.style.animationDuration=
+        (
+            5+
+            Math.random()*8
+        )+
+        "s";
+
+
+    document
+        .getElementById(
+            "particles"
+        )
+        .appendChild(p);
+
+}
+
+
+/* =========================================================
+   CELEBRATION
+========================================================= */
+
+function celebrate(){
+
+    for(
+        let i=0;
+        i<15;
+        i++
+    ){
+
+        let e=
+            document.createElement(
+                "div"
+            );
+
+
+        e.textContent=
+            [
+                "✨",
+                "🎉",
+                "💖",
+                "⭐",
+                "🪙"
+            ][
+                Math.floor(
+                    Math.random()*5
+                )
+            ];
+
+
+        e.style.position=
+            "fixed";
+
+
+        e.style.left=
+            Math.random()*100+
+            "%";
+
+
+        e.style.top=
+            "50%";
+
+
+        e.style.fontSize=
+            "30px";
+
+
+        e.style.zIndex=
+            "999";
+
+
+        document.body
+            .appendChild(e);
+
+
+        e.animate(
+
+            [
+
+                {
+                    transform:
+                        "translateY(0) scale(1)",
+
+                    opacity:1
+
+                },
+
+                {
+
+                    transform:
+                        `
+                        translateY(
+                            ${
+                                -200-
+                                Math.random()*300
+                            }px
+                        )
+                        rotate(
+                            ${
+                                Math.random()*720
+                            }deg
+                        )
+                        scale(.2)
+                        `,
+
+                    opacity:0
+
+                }
+
+            ],
+
+            {
+                duration:1000
+            }
+
+        ).onfinish=
+            ()=>{
+                e.remove();
+            };
+
+    }
+
+}
+
+
+/* =========================================================
+   HTML ESCAPE
+========================================================= */
+
+function escapeHTML(value){
+
+    return String(value)
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+        .replace(
+            /</g,
+            "&lt;"
+        )
+        .replace(
+            />/g,
+            "&gt;"
+        )
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+        .replace(
+            /'/g,
+            "&#039;"
+        );
+
+}
+
+
+/* =========================================================
+   MODAL CLICK OUTSIDE
+========================================================= */
+
+document
+    .getElementById("modal")
+    .addEventListener(
+        "click",
+        function(e){
+
+            if(
+                e.target===this
+            ){
+
+                closeGame();
+
+            }
+
+        }
+    );
+
+
+/* =========================================================
+   INITIAL SETTINGS
+========================================================= */
+
+if(
+    db.settings.dark
+){
+
+    document.body
+        .classList.add("dark");
+
+}
+
+
+/* =========================================================
+   RESTORE LAST PLAYER
+========================================================= */
+
+const LAST_PLAYER=
+    "ATHENA_LAST_PLAYER";
+
+
+let savedPlayer=
+    localStorage.getItem(
+        LAST_PLAYER
+    );
+
+
+if(savedPlayer){
+
+    try{
+
+        if(
+            db.players[savedPlayer]
+        ){
+
+            currentPlayer=
+                savedPlayer;
+
+
+            document
+                .getElementById(
+                    "loginScreen"
+                )
+                .style.display="none";
+
+
+            showLoading();
+
+        }
+
+    }catch(e){}
+
+}
+
+
+/* =========================================================
+   SAVE LAST PLAYER
+========================================================= */
+
+setInterval(()=>{
+
+    if(currentPlayer){
+
+        localStorage.setItem(
+            LAST_PLAYER,
+            currentPlayer
+        );
+
+    }
+
+},500);
+
+
+/* =========================================================
+   INITIAL LEADERBOARD
+========================================================= */
+
+renderLeaderboard();
+
+</script>
+
+</body>
+  </html>
